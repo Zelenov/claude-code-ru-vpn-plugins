@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "ru-vpn-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  },
+  "enabledPlugins": {
+    "vpn-russian@ru-vpn-marketplace": true
+  }
+}

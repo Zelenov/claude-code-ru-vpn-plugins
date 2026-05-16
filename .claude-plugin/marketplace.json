@@ -1,0 +1,14 @@
+{
+  "name": "ru-vpn-marketplace",
+  "description": "VPN setup plugins for 3x-ui VLESS+Reality relay chains",
+  "owner": {
+    "name": "Eugene Zelenov"
+  },
+  "plugins": [
+    {
+      "name": "vpn-russian",
+      "source": "./.claude/plugins/vpn-russian",
+      "description": "Russian VPS relay: VLESS+Reality direct exit (phase 1) and optional bridge to foreign exit (phase 2)"
+    }
+  ]
+}

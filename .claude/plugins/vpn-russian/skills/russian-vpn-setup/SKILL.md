@@ -25,7 +25,7 @@ Ask the user for anything missing:
 | `EXIT_UUID` | — | Relay user on foreign inbound |
 | `EXIT_PUB_KEY` | — | From `vpn-foreign-exit` |
 | `EXIT_SHORT_ID` | — | From `vpn-foreign-exit` |
-| `FOREIGN_SNI` | `www.microsoft.com` | Foreign exit SNI |
+| `FOREIGN_SNI` | `gateway.icloud.com` | Foreign exit donor; must have a small cert chain (`vpn-foreign-exit`) - `www.microsoft.com` breaks clients |
 
 Foreign exit must exist first (`vpn-foreign-exit` or equivalent). SSH: `~/.ssh/vpn_servers` — see `vpn-server-access`.
 
@@ -97,11 +97,21 @@ vless://<UUID>@<RELAY_IP>:443?type=tcp&security=reality&fp=chrome&sni=<RU_SNI>&p
 
 ## Adding users later
 
-Use `vpn-users`. Each new **bridge** user needs a routing rule in `extra.json` and x-ui restart.
+Use `vpn-users` → `add_client()` (the panel's `addClient` endpoint is gone in 3x-ui 3.4+).
+Each new **bridge** user needs routing rules in `extra.json` and an x-ui restart; xray does
+not pick up new clients without the restart. Put the user's name after `#` in the link.
 
 ## Debug: bypass foreign leg
 
 Empty `extra.json` -> all traffic exits from Russian server (isolates Russian direct vs Russian->foreign). Restore when done. See `vpn-bridge`.
+
+## If it breaks months later
+
+| Symptom | Where to look |
+|---------|---------------|
+| Bridge users dead, `*-direct` fine, xray on relay OOM-killed, hundreds of stuck sockets to `<EXIT_IP>:443` | `vpn-bridge` § Troubleshooting → reverse SSH tunnel |
+| All clients `handshake did not complete`, openssl probes pass | Donor cert too large → `vpn-foreign-exit` § Choosing the donor |
+| New user's key does nothing | x-ui not restarted after the panel change → `vpn-users` |
 
 ## Related plugin skills
 
@@ -111,7 +121,7 @@ Empty `extra.json` -> all traffic exits from Russian server (isolates Russian di
 | `vpn-server-access` | SSH paramiko, file writes, diagnostics |
 | `vpn-3xui-common` | Install, password, panel HTTPS |
 | `vpn-users` | Add bridge/direct users + routing sync |
-| `vpn-bridge` | Xray wrapper, extra.json, debug bypass |
+| `vpn-bridge` | Xray wrapper, extra.json, end-to-end test, filtered-path workaround |
 
 ## Repo docs
 

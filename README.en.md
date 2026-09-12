@@ -1,4 +1,9 @@
 # Russian VPN Setup Plugin (Claude Code)
+
+<p align="center">
+  <img src="assets/promo/vpn-russian-english-flow-1920x1080.jpg" alt="Your own VPN, set up with Claude Code: phone → RU server → world server → Internet" width="100%">
+</p>
+
 4 steps to your own VPN that can be used by **your whole family and unlimited friends**.
 - [1. Buy 2 servers (Russian + foreign)](#1-buy-2-servers-russian--foreign)
 - [2. Install Claude Code plugin](#2-install-claude-code-plugin)

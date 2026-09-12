@@ -94,4 +94,18 @@ run("ss -tlnp | grep :443")
 run("ufw status")
 run("journalctl -u x-ui --no-pager -n 30")
 run("ps aux | grep xray | grep -v grep")
+run("journalctl -k --no-pager | grep 'Out of memory' | tail -5")      # xray OOM history (stuck sockets)
+run("ss -tno state established | grep <EXIT_IP>:443 | head")          # relay→exit: Send-Q>0 + retrans timer = filtered
+run("free -m; ps -o pid,rss,etime,cmd -C xray-linux-amd64.real")
+run("timeout 20 tcpdump -ni ens3 host <PEER_IP> and port 443 -c 20 2>&1 | tail -20", timeout=30)
 ```
+
+Interpretation and the reverse-tunnel workaround for a filtered relay→exit path:
+`vpn-bridge` § Troubleshooting.
+
+## Commands the auto-mode classifier refuses
+
+Writing `authorized_keys`, running `ssh-keygen` on a remote host, and creating systemd units
+over SSH get blocked in Claude Code auto mode. Do not loop on retries: print the exact
+commands for the user to paste on the right host (tell them which hostname the prompt should
+show), then verify the result yourself once they confirm.

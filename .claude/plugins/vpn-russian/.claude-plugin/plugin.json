@@ -1,6 +1,6 @@
 {
   "name": "vpn-russian",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Set up a Russian VPS as a VLESS+Reality relay with 3x-ui: standalone direct exit, then optional bridge to a foreign exit node.",
   "author": {
     "name": "Eugene Zelenov"

@@ -135,7 +135,34 @@ Use plugin vpn-russian and build a full working chain:
 
 * Скопируйте эту ссылку `vless://...` (или QR-код) и импортируйте её в одно из приложений ниже.
 
-## 5. Приложения для импорта ссылки VLESS
+## 5. Если что-то сломалось или нужно добавить человека
+
+Плагин умеет не только ставить, но и чинить. Готовые prompt'ы:
+
+**Добавить пользователя** (имя после `#` в ссылке — это то, как подключение будет называться в приложении):
+
+```text
+Use plugin vpn-russian. Add a new bridge user "masha" on the Russian relay,
+add routing rules, restart x-ui, test from the relay, and give me a vless:// link
+and QR with "#masha" as the name.
+```
+
+**VPN перестал работать** (у всех пользователей моста нет интернета):
+
+```text
+Use plugin vpn-russian. VPN is down — check what's up. Check both servers, then test
+the relay → exit leg from the relay itself (openssl, ss, OOM history). If connections
+opened from the relay to the exit lose data while the reverse direction works,
+set up the reverse SSH tunnel from vpn-bridge and re-test.
+```
+
+Что известно на 2026-09: у пары Россия → Нидерланды после нескольких месяцев работы
+начали теряться данные в соединениях, которые открывает **российский** сервер к зарубежному
+(рукопожатие проходит, дальше тишина, даже по SSH). Обратное направление работает.
+Плагин переводит мост на обратный SSH-туннель со стороны зарубежного сервера — ссылки
+пользователей при этом не меняются.
+
+## 6. Приложения для импорта ссылки VLESS
 
 | Платформа | Happ Proxy Utility Plus | Hiddify | v2RayTun | Streisand |
 | --- | --- | --- | --- | --- |

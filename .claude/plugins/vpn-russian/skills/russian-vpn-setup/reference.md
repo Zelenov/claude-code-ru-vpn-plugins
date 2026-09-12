@@ -135,7 +135,7 @@ EXIT_IP       = "<EXIT_IP>"
 EXIT_UUID     = "<EXIT_UUID>"
 EXIT_PUB_KEY  = "<PUBLIC_KEY>"
 EXIT_SHORT_ID = "<SHORT_ID>"
-FOREIGN_SNI   = "www.microsoft.com"
+FOREIGN_SNI   = "gateway.icloud.com"   # small cert chain; www.microsoft.com breaks Reality (vpn-foreign-exit)
 
 extra = {
     "outbounds": [{
